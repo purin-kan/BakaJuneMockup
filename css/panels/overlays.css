@@ -1,0 +1,3 @@
+/* Styles owned by the Map Overlays module.
+   Most overlay styling is set as SVG attributes inside js/map/overlays.js. Use this file only for
+   custom CSS that can't go there. This file is yours — no other panel-owner should edit it. */

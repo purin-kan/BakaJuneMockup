@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BAKA Index Sugarcane App</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              green: '#2d7a3a',
+              teal: '#0ea5e9',
+              dark: '#1f2937',
+              gray: '#6b7280',
+              light: '#f3f4f6',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+</head>
+<body class="h-screen w-screen overflow-hidden bg-gray-100 flex flex-col font-sans text-sm text-gray-800">
+
+  <!-- HEADER -->
+  <header class="h-12 bg-white flex items-center justify-between px-4 shadow z-50 shrink-0 relative">
+    <div class="flex items-center gap-2">
+      <!-- Fake BAKA Index Logo -->
+      <div class="flex items-center text-xl font-black tracking-tight">
+        <span class="text-green-800">B</span>
+        <span class="text-lime-500">A</span>
+        <span class="text-orange-500">K</span>
+        <span class="text-red-500">A</span>
+        <span class="text-gray-600 ml-1 font-bold">Index</span>
+      </div>
+      <span class="text-xs text-gray-500 mt-1">with SuCose</span>
+      <button class="ml-2 bg-[#2d7a3a] text-white px-3 py-1 rounded-full text-xs font-semibold shadow-sm hover:bg-green-700 transition">
+        อ้อย
+      </button>
+    </div>
+
+    <!-- Search Bar (Visual Only) -->
+    <div class="absolute left-1/2 -translate-x-1/2 w-96 max-w-full">
+      <div class="relative flex items-center">
+        <svg class="w-4 h-4 absolute left-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <input type="text" placeholder="Search places" class="w-full pl-9 pr-4 py-1.5 bg-gray-50 border border-gray-200 rounded text-sm focus:outline-none focus:ring-1 focus:ring-green-500 shadow-inner">
+      </div>
+    </div>
+
+    <div class="flex items-center text-xs text-gray-500">
+      <span class="mr-1">⚙️</span> Google Earth Engine Apps
+    </div>
+  </header>
+
+  <!-- MAIN MAP AREA -->
+  <main class="flex-1 relative overflow-hidden bg-gray-200" id="map-container">
+    <!-- Static Satellite Background -->
+    <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('assets/satellite.png');"></div>
+    
+    <!-- SVG Map Overlays Mount -->
+    <svg id="map-overlays" class="absolute inset-0 w-full h-full pointer-events-none z-10"></svg>
+
+    <!-- FLOATING PANEL MOUNTS (Overlays) -->
+    
+    <!-- Left Sidebar -->
+    <div id="panel-leftSidebar" class="absolute top-4 left-4 z-20 transition-all duration-200"></div>
+    
+    <!-- BAKA ID panel -->
+    <div id="panel-bakaId" class="absolute top-4 left-[280px] z-20 transition-all duration-200"></div>
+
+    <!-- Map Mode -->
+    <div id="panel-mapMode" class="absolute top-4 left-1/2 -translate-x-1/2 z-20 transition-all duration-200"></div>
+
+    <!-- Analysis Results (Top Right) -->
+    <div id="panel-analysisResults" class="absolute top-4 right-[340px] z-20 transition-all duration-200 hidden"></div>
+
+    <!-- Right Sidebar -->
+    <div id="panel-rightSidebar" class="absolute top-4 right-4 z-20 transition-all duration-200 hidden"></div>
+
+    <!-- Legend -->
+    <div id="panel-legend" class="absolute bottom-12 left-4 z-20 transition-all duration-200 hidden"></div>
+
+    <!-- Processing Status -->
+    <div id="panel-processing" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-200 hidden"></div>
+
+    <!-- User Manual -->
+    <div id="panel-userManual" class="absolute bottom-4 right-4 z-20 transition-all duration-200"></div>
+    
+  </main>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center gap-2 pointer-events-none"></div>
+
+  <!-- Chart Fullscreen Modal Mount -->
+  <div id="modal-container" class="fixed inset-0 z-[100] hidden bg-black/60 flex items-center justify-center p-8 backdrop-blur-sm opacity-0 transition-opacity duration-200">
+    <div class="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[80vh] flex flex-col">
+      <div class="flex justify-between items-center p-4 border-b">
+        <h3 id="modal-title" class="font-semibold text-lg">Chart</h3>
+        <button id="modal-close" class="text-gray-500 hover:text-black">✖</button>
+      </div>
+      <div class="flex-1 p-4 relative bg-gray-50">
+        <canvas id="modal-canvas"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dev Toolbar -->
+  <div id="dev-toolbar-mount"></div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

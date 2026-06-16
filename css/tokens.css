@@ -1,0 +1,22 @@
+:root {
+  /* Colors */
+  --color-brand-green: #2d7a3a;
+  --color-brand-green-hover: #225e2c;
+  --color-brand-teal: #0ea5e9;
+  --color-brand-red: #ef4444;
+  --color-bg-panel: #ffffff;
+  --color-text-main: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  
+  /* Shadows */
+  --shadow-panel: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-floating: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Radii */
+  --radius-panel: 8px;
+  --radius-button: 4px;
+  
+  /* Transitions */
+  --transition-speed: 200ms;
+}

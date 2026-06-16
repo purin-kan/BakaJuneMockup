@@ -1,0 +1,3 @@
+/* Styles owned by the Left Sidebar panel.
+   Prefer Tailwind utility classes inside js/panels/leftSidebar.js. Use this file only for custom
+   CSS that Tailwind can't express. This file is yours — no other panel-owner should edit it. */

@@ -1,0 +1,3 @@
+/* Styles owned by the Right Sidebar panel.
+   Prefer Tailwind utility classes inside js/panels/rightSidebar.js. Use this file only for custom
+   CSS that Tailwind can't express. This file is yours — no other panel-owner should edit it. */
