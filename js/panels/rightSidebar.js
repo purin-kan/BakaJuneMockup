@@ -21,13 +21,27 @@ export function initRightSidebar() {
   // Setup interactive behaviors (collapse & expand chart)
   setupInteractions(container);
 
+  const mapMode = document.getElementById('panel-mapMode');
+  const btnFullscreen = document.getElementById('btn-fullscreen');
+  const userManual = document.getElementById('panel-userManual');
+  const SIDEBAR_W = 325;
+
+  function shiftRight(toProcessed) {
+    const r = toProcessed ? `${SIDEBAR_W + 16}px` : '16px';
+    if (mapMode) mapMode.style.right = r;
+    if (btnFullscreen) btnFullscreen.style.right = r;
+    if (userManual) userManual.style.right = r;
+  }
+
   // Contract 1: Listen to state:change to show/hide the whole panel
   bus.on('state:change', ({ state }) => {
     if (state === AppState.PROCESSED) {
       container.classList.remove('hidden');
       updatePlotVisibility(plotCards);
+      shiftRight(true);
     } else {
       container.classList.add('hidden');
+      shiftRight(false);
     }
   });
 
@@ -60,102 +74,67 @@ function updatePlotVisibility(cards) {
   });
 }
 
-function renderSidebar(container) {
-  // Ensure the container itself acts as a side panel.
-  // Tailwind classes added to style it.
-  container.className = 'w-96 bg-white border-l shadow-xl flex flex-col h-full hidden transition-transform duration-300 relative z-20';
-  
-  let html = `
-    <!-- Top Tabs and Checkboxes (Visual Only) -->
-    <div class="p-4 border-b">
-      <div class="flex space-x-2 mb-4">
-        <button class="flex-1 py-2 bg-green-600 text-white rounded-md font-bold hover:bg-green-700 transition shadow-sm">หนังสือ</button>
-        <button class="flex-1 py-2 bg-gray-100 text-gray-700 rounded-md font-bold hover:bg-gray-200 transition shadow-sm">ค่าดาวเทียมเทียม</button>
-      </div>
-      <div class="flex items-center space-x-4 text-sm text-gray-600">
-        <label class="flex items-center space-x-1 cursor-pointer group">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 rounded border-gray-300 focus:ring-green-500">
-          <span class="group-hover:text-green-700">ค้าพล</span>
-        </label>
-        <label class="flex items-center space-x-1 cursor-pointer group">
-          <input type="checkbox" class="form-checkbox h-4 w-4 text-green-600 rounded border-gray-300 focus:ring-green-500">
-          <span class="group-hover:text-green-700">ค้าพยิ่ง</span>
-        </label>
-      </div>
-    </div>
-    
-    <!-- Scrollable list of plot cards -->
-    <div class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50 scrollbar-thin scrollbar-thumb-gray-300">
-  `;
+const EXPAND_ICON = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>`;
 
-  // Plot Cards using FAKE_DATA
+function renderSidebar(container) {
+  container.style.width = '325px';
+  container.style.height = 'calc(100vh - 70px)';
+
+  let html = `<div class="flex flex-col h-full overflow-y-auto bg-white">`;
+
   Object.keys(FAKE_DATA.plots).forEach(id => {
     const plot = FAKE_DATA.plots[id];
     html += `
-      <div id="plot-card-${id}" class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hidden transition-all duration-300 hover:shadow-md">
-        <!-- Card Header with Toggle -->
-        <div class="bg-green-50/80 px-4 py-3 border-b border-green-100 flex justify-between items-center cursor-pointer toggle-collapse group" data-id="${id}">
-          <h3 class="font-bold text-green-800 group-hover:text-green-900">แปลง ${id}</h3>
-          <span class="text-xs font-medium text-green-600 px-2 py-1 bg-green-100 rounded-full group-hover:bg-green-200 transition toggle-text">[ย่อ]</span>
+      <div id="plot-card-${id}" class="hidden border-b border-gray-200">
+        <!-- Card header -->
+        <div class="px-3 py-2 bg-white flex justify-between items-center">
+          <span class="font-bold text-sm text-gray-800">แปลง ${id}</span>
         </div>
-        
-        <!-- Card Content -->
-        <div class="p-4 collapse-content">
-          <p class="text-sm text-gray-600 whitespace-pre-line mb-5 leading-relaxed bg-gray-50 p-3 rounded-lg">${plot.stats}</p>
+        <!-- Card body -->
+        <div id="plot-body-${id}" class="px-3 pb-2">
+          <p class="text-xs text-gray-700 mb-2 leading-relaxed">${plot.stats}</p>
     `;
 
-    // Histogram Chart
     if (plot.histogramData) {
       html += `
-          <div class="mb-6 relative group/chart bg-white p-2 rounded-lg border border-gray-50">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide">ฮิสโตแกรม</h4>
-              <button class="p-1.5 bg-gray-50 hover:bg-green-50 rounded-md shadow-sm text-gray-400 hover:text-green-600 expand-chart-btn opacity-0 group-hover/chart:opacity-100 transition-opacity" data-type="histogram" data-id="${id}" title="ขยายกราฟ">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-              </button>
+          <div class="mb-2 border border-gray-200 rounded overflow-hidden bg-white">
+            <div class="flex justify-between items-center px-2 pt-1.5 pb-0">
+              <span class="text-xs text-gray-500">Compare histograms by BAKA Index</span>
+              <button class="expand-chart-btn text-gray-400 hover:text-gray-700 p-0.5" data-type="histogram" data-id="${id}">${EXPAND_ICON}</button>
             </div>
-            <div class="h-40 relative">
-              <canvas id="chart-hist-${id}"></canvas>
-            </div>
+            <div class="h-24 px-1 pb-1"><canvas id="chart-hist-${id}"></canvas></div>
           </div>
       `;
     }
-    
-    // Line Chart
+
     if (plot.lineData) {
       html += `
-          <div class="mb-6 relative group/chart bg-white p-2 rounded-lg border border-gray-50">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide">แนวโน้ม</h4>
-              <button class="p-1.5 bg-gray-50 hover:bg-green-50 rounded-md shadow-sm text-gray-400 hover:text-green-600 expand-chart-btn opacity-0 group-hover/chart:opacity-100 transition-opacity" data-type="line" data-id="${id}" title="ขยายกราฟ">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-              </button>
+          <div class="mb-2 border border-gray-200 rounded overflow-hidden bg-white">
+            <div class="flex justify-between items-center px-2 pt-1.5 pb-0">
+              <span class="text-xs text-gray-500">BAKA Index: Sugarcane Growth</span>
+              <button class="expand-chart-btn text-gray-400 hover:text-gray-700 p-0.5" data-type="line" data-id="${id}">${EXPAND_ICON}</button>
             </div>
-            <div class="h-40 relative">
-              <canvas id="chart-line-${id}"></canvas>
-            </div>
+            <div class="h-24 px-1 pb-1"><canvas id="chart-line-${id}"></canvas></div>
           </div>
       `;
     }
-    
-    // Doughnut Chart
+
     if (plot.doughnutData) {
       html += `
-          <div class="mb-2 relative group/chart bg-white p-2 rounded-lg border border-gray-50">
-            <div class="flex justify-between items-center mb-2">
-              <h4 class="text-xs font-bold text-gray-500 uppercase tracking-wide">สัดส่วน</h4>
-              <button class="p-1.5 bg-gray-50 hover:bg-green-50 rounded-md shadow-sm text-gray-400 hover:text-green-600 expand-chart-btn opacity-0 group-hover/chart:opacity-100 transition-opacity" data-type="doughnut" data-id="${id}" title="ขยายกราฟ">
-                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
-              </button>
+          <div class="mb-2 border border-gray-200 rounded overflow-hidden bg-white">
+            <div class="flex justify-between items-center px-2 pt-1.5 pb-0">
+              <span class="text-xs text-gray-500">สัดส่วน BAKA Index</span>
+              <button class="expand-chart-btn text-gray-400 hover:text-gray-700 p-0.5" data-type="doughnut" data-id="${id}">${EXPAND_ICON}</button>
             </div>
-            <div class="h-40 flex justify-center relative">
-              <canvas id="chart-doughnut-${id}"></canvas>
-            </div>
+            <div class="h-24 px-1 pb-1"><canvas id="chart-doughnut-${id}"></canvas></div>
           </div>
       `;
     }
 
     html += `
+          <div class="flex justify-end mt-1 mb-1">
+            <button class="card-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-100 bg-white" data-id="${id}">ย่อ</button>
+          </div>
         </div>
       </div>
     `;
