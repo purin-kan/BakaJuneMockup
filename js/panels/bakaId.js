@@ -7,26 +7,41 @@ export function initBakaId() {
   if (!container) return;
 
   container.innerHTML = `
-    <div class="bg-white rounded shadow-md w-[320px] overflow-hidden flex flex-col pointer-events-auto border border-gray-200">
+    <div class="flex flex-col pointer-events-auto" style="width: 320px;">
+    <div class="bg-white shadow-md overflow-hidden border border-gray-200">
       <!-- Header -->
-      <div class="bg-brand-green text-white px-3 py-2 flex items-center justify-between">
-        <div class="font-bold text-sm">BAKA ID</div>
-        <button id="bakaId-collapse-btn" class="text-white hover:bg-green-700 px-2 py-0.5 rounded text-xs transition-colors">ย่อ</button>
+      <div class="px-2 py-1.5 bg-white border-b border-gray-200">
+        <span class="text-xs font-bold text-gray-800">BAKA ID</span>
       </div>
-      
+
       <!-- Body -->
-      <div id="bakaId-body" class="p-3 bg-white">
-        <form id="bakaId-search-form" class="flex gap-2 mb-3">
-          <input id="bakaId-search-input" type="text" placeholder="@BAKA ID หรือค้นหาสถานที่" class="flex-1 border border-gray-300 rounded px-2 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-brand-green">
-          <button type="submit" id="bakaId-search-btn" class="bg-gray-100 border border-gray-300 rounded px-3 py-1.5 hover:bg-gray-200 flex items-center justify-center transition-colors min-w-[40px]">
+      <div id="bakaId-body" class="bg-gray-100 px-2 pt-2 pb-1">
+        <form id="bakaId-search-form" class="flex gap-1 mb-2">
+          <input id="bakaId-search-input" type="text" placeholder="@BAKA ID หรือค้นหาสถานที่"
+            class="flex-1 border border-gray-300 rounded px-2 py-1 text-xs bg-white focus:outline-none focus:ring-1 focus:ring-green-500">
+          <button type="submit" id="bakaId-search-btn"
+            class="bg-white border border-gray-300 rounded px-2 py-1 text-xs hover:bg-gray-50 flex items-center gap-1">
             <span id="bakaId-search-icon">🔍</span>
-            <div id="bakaId-spinner" class="hidden w-4 h-4 border-2 border-gray-400 border-t-brand-green rounded-full animate-spin"></div>
+            <div id="bakaId-spinner" class="hidden w-3 h-3 border-2 border-gray-400 border-t-green-600 rounded-full animate-spin"></div>
+            ค้นหา
           </button>
         </form>
-        
+
         <div class="text-xs text-gray-500 mb-1">ประวัติการค้นหา</div>
-        <ul id="bakaId-history-list" class="max-h-48 overflow-y-auto border-t border-gray-200"></ul>
+        <ul id="bakaId-history-list" class="max-h-40 overflow-y-auto bg-white border border-gray-200 rounded"></ul>
+
+        <div class="flex justify-end mt-2">
+          <button id="bakaId-collapse-btn" class="text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white">ย่อ</button>
+        </div>
       </div>
+    </div>
+
+    <!-- Zoom buttons -->
+    <div class="flex flex-col shadow-md border border-gray-200 overflow-hidden bg-white" style="margin-top: 16px; width: fit-content;">
+      <button id="zoom-in" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 border-b border-gray-200 flex items-center justify-center">+</button>
+      <button id="zoom-out" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 flex items-center justify-center">−</button>
+    </div>
+
     </div>
   `;
 
