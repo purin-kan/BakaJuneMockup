@@ -10,12 +10,13 @@ export function initBakaId() {
     <div class="flex flex-col pointer-events-auto" style="width: 320px;">
     <div class="bg-white shadow-md overflow-hidden border border-gray-200">
       <!-- Header -->
-      <div class="px-2 py-1.5 bg-white border-b border-gray-200">
+      <div class="px-2 py-1.5 bg-white border-b border-gray-200 flex justify-between items-center">
         <span class="text-xs font-bold text-gray-800">BAKA ID</span>
+        <button id="bakaId-collapse-btn" class="text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white">ย่อ</button>
       </div>
 
       <!-- Body -->
-      <div id="bakaId-body" class="bg-gray-100 px-2 pt-2 pb-1">
+      <div id="bakaId-body" class="bg-gray-100 px-2 pt-2 pb-2">
         <form id="bakaId-search-form" class="flex gap-1 mb-2">
           <input id="bakaId-search-input" type="text" placeholder="@BAKA ID หรือค้นหาสถานที่"
             class="flex-1 border border-gray-300 rounded px-2 py-1 text-xs bg-white focus:outline-none focus:ring-1 focus:ring-green-500">
@@ -29,17 +30,7 @@ export function initBakaId() {
 
         <div class="text-xs text-gray-500 mb-1">ประวัติการค้นหา</div>
         <ul id="bakaId-history-list" class="max-h-40 overflow-y-auto bg-white border border-gray-200 rounded"></ul>
-
-        <div class="flex justify-end mt-2">
-          <button id="bakaId-collapse-btn" class="text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white">ย่อ</button>
-        </div>
       </div>
-    </div>
-
-    <!-- Zoom buttons -->
-    <div class="flex flex-col shadow-md border border-gray-200 overflow-hidden bg-white" style="margin-top: 16px; width: fit-content;">
-      <button id="zoom-in" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 border-b border-gray-200 flex items-center justify-center">+</button>
-      <button id="zoom-out" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 flex items-center justify-center">−</button>
     </div>
 
     </div>
@@ -90,11 +81,7 @@ export function initBakaId() {
   });
 
   bus.on('state:change', ({ state }) => {
-    if (state === AppState.PROCESSED) {
-      container.classList.add('hidden');
-    } else {
-      container.classList.remove('hidden');
-    }
+    container.classList.toggle('hidden', state === AppState.PROCESSING);
   });
 }
 

@@ -6,19 +6,19 @@ export function initLeftSidebar() {
   if (!container) return;
 
   container.innerHTML = `
-    <div id="left-sidebar-content" class="bg-white shadow-xl flex flex-col z-50 relative transition-all duration-300 overflow-hidden" style="width: 325px; height: calc(100vh - 70px);">
+    <div id="left-sidebar-content" class="bg-white shadow-xl flex flex-col z-50 relative transition-all duration-300" style="width: 325px; height: calc(100vh - 70px);">
+
+      <!-- Title + Description + Collapse (always visible) -->
+      <div class="px-3 pt-3 pb-2 flex justify-between items-start shrink-0 border-b border-gray-200">
+        <div class="flex-1 pr-2">
+          <div class="text-blue-500 font-bold text-lg leading-tight cursor-pointer hover:underline">SugarCane@2025.12.30</div>
+          <div class="text-xs text-gray-900 mt-1 leading-snug">ค่าดัชนีบ่งบอกการเจริญเติบโตอ้อยโรงงานรายแปลงเพาะปลูก ตามระยะเวลาที่กำหนด</div>
+        </div>
+        <button id="btn-collapse" class="text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-600 hover:bg-gray-100 shrink-0 mt-1">ย่อ</button>
+      </div>
 
       <!-- Scrollable body -->
       <div class="flex-1 overflow-y-auto" id="left-sidebar-body">
-
-        <!-- Title + Description + Collapse -->
-        <div class="px-3 pt-3 pb-2 flex justify-between items-start">
-          <div class="flex-1 pr-2">
-            <div class="text-blue-500 font-bold text-lg leading-tight cursor-pointer hover:underline">SugarCane@2025.12.30</div>
-            <div class="text-xs text-gray-900 mt-1 leading-snug">ค่าดัชนีบ่งบอกการเจริญเติบโตอ้อยโรงงานรายแปลงเพาะปลูก ตามระยะเวลาที่กำหนด</div>
-          </div>
-          <button id="btn-collapse" class="text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-600 hover:bg-gray-100 shrink-0 mt-1">ย่อ</button>
-        </div>
 
         <!-- Date row -->
         <div class="px-3 py-2 flex items-center gap-1 text-xs text-gray-700 border-t border-gray-200">
@@ -135,18 +135,34 @@ export function initLeftSidebar() {
   const btnProcess = document.getElementById('btn-process');
   const btnCancel = document.getElementById('btn-cancel');
 
-  // Collapse entire sidebar
+  // Collapse: hide body, keep title visible, make bg transparent
   let collapsed = false;
+  const sidebarContent = document.getElementById('left-sidebar-content');
+  const titleBlock = sidebarContent.querySelector('.shrink-0');
+  const googleLogo = document.getElementById('google-logo');
+  const zoomButtons = document.getElementById('zoom-buttons');
+  const legendPanel = document.getElementById('panel-legend');
   btnCollapse.addEventListener('click', () => {
     collapsed = !collapsed;
-    const content = document.getElementById('left-sidebar-content');
     if (collapsed) {
-      content.style.width = '0';
-      content.style.overflow = 'hidden';
+      leftSidebarBody.classList.add('hidden');
+      sidebarContent.style.background = 'transparent';
+      sidebarContent.style.boxShadow = 'none';
+      titleBlock.style.background = 'rgba(255,255,255,1)';
+      titleBlock.style.borderBottom = 'none';
+      if (googleLogo) googleLogo.style.left = '8px';
+      if (zoomButtons) zoomButtons.style.left = '8px';
+      if (legendPanel) legendPanel.style.left = '8px';
       btnCollapse.textContent = 'ขยาย';
     } else {
-      content.style.width = '325px';
-      content.style.overflow = 'hidden';
+      leftSidebarBody.classList.remove('hidden');
+      sidebarContent.style.background = '';
+      sidebarContent.style.boxShadow = '';
+      titleBlock.style.background = '';
+      titleBlock.style.borderBottom = '';
+      if (googleLogo) googleLogo.style.left = '333px';
+      if (zoomButtons) zoomButtons.style.left = '341px';
+      if (legendPanel) legendPanel.style.left = '333px';
       btnCollapse.textContent = 'ย่อ';
     }
   });

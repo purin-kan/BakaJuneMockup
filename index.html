@@ -75,33 +75,44 @@
     <div id="panel-leftSidebar" class="absolute top-0 left-0 z-20 transition-all duration-200"></div>
     
     <!-- BAKA ID panel -->
-    <div id="panel-bakaId" class="absolute top-4 left-[341px] z-20 transition-all duration-200"></div>
+    <div id="panel-bakaId" class="absolute top-4 z-20" style="left: 341px; transition: left 0.3s;"></div>
 
     <!-- Map Mode -->
-    <div id="panel-mapMode" class="absolute top-4 right-4 z-20 transition-all duration-200"></div>
+    <div id="panel-mapMode" class="absolute top-4 z-20" style="right: 16px; transition: right 0.3s;"></div>
 
     <!-- Fullscreen Button (separate from map mode) -->
-    <button id="btn-fullscreen" class="absolute z-20 bg-white border border-gray-300 shadow-md p-1.5 hover:bg-gray-50" style="top: calc(1rem + 70px); right: 1rem;">
+    <button id="btn-fullscreen" class="absolute z-20 bg-white border border-gray-300 shadow-md p-1.5 hover:bg-gray-50" style="top: calc(1rem + 70px); right: 16px; transition: right 0.3s;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
         <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
       </svg>
     </button>
 
+    <!-- Zoom Buttons -->
+    <div id="zoom-buttons" class="absolute z-20 flex flex-col shadow-md border border-gray-200 overflow-hidden bg-white" style="top: 210px; left: 341px; transition: left 0.3s;">
+      <button id="zoom-in" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 border-b border-gray-200 flex items-center justify-center">+</button>
+      <button id="zoom-out" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 flex items-center justify-center">−</button>
+    </div>
+
     <!-- Analysis Results (Top Right) -->
-    <div id="panel-analysisResults" class="absolute top-4 right-[340px] z-20 transition-all duration-200 hidden"></div>
+    <!-- <div id="panel-analysisResults" class="absolute top-4 right-[340px] z-20 transition-all duration-200 hidden"></div> -->
 
     <!-- Right Sidebar -->
-    <div id="panel-rightSidebar" class="absolute top-4 right-4 z-20 transition-all duration-200 hidden"></div>
+    <div id="panel-rightSidebar" class="absolute top-0 right-0 z-20 hidden"></div>
 
     <!-- Legend -->
-    <div id="panel-legend" class="absolute bottom-12 left-4 z-20 transition-all duration-200 hidden"></div>
+    <div id="panel-legend" class="absolute z-20 hidden" style="bottom: 24px; left: 333px; transition: left 0.3s;"></div>
 
     <!-- Processing Status -->
     <div id="panel-processing" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30 transition-all duration-200 hidden"></div>
 
     <!-- User Manual -->
-    <div id="panel-userManual" class="absolute bottom-4 right-4 z-20 transition-all duration-200"></div>
-    
+    <div id="panel-userManual" class="absolute bottom-4 z-20" style="right: 16px; transition: right 0.3s;"></div>
+
+    <!-- Google Logo -->
+    <div id="google-logo" class="absolute bottom-0 z-20" style="left: 333px; transition: left 0.3s;">
+      <img src="assets/google.svg" alt="Google" class="h-6 w-auto">
+    </div>
+
   </main>
 
   <!-- Toast Container -->
