@@ -68,3 +68,6 @@ build/
 *.bak
 *.tmp
 *.swp
+
+# Temp
+/temp/
