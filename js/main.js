@@ -6,11 +6,11 @@ import { bus, store, AppState, setState } from './state.js';
 import { initLeftSidebar } from './panels/leftSidebar.js';
 import { initBakaId } from './panels/bakaId.js';
 import { initMapMode } from './panels/mapMode.js';
-import { initAnalysisResults } from './panels/analysisResults.js';
 import { initRightSidebar } from './panels/rightSidebar.js';
 import { initLegend } from './panels/legend.js';
 import { initProcessing } from './panels/processing.js';
 import { initUserManual } from './panels/userManual.js';
+import { initDataLevel } from './panels/dataLevel.js';
 import { initMapOverlays } from './map/overlays.js';
 import { initDevToolbar } from './devToolbar.js';
 
@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
   initLeftSidebar();
   initBakaId();
   initMapMode();
-  initAnalysisResults();
   initRightSidebar();
   initLegend();
   initProcessing();
   initUserManual();
+  initDataLevel();
   initMapOverlays();
   initDevToolbar();
 

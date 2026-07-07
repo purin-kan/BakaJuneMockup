@@ -14,7 +14,6 @@ Each panel is a self-contained module. The owner of an area edits only these fil
 | Left panel        | `js/panels/leftSidebar.js`     | `js/data/leftSidebar.data.js`         | `css/panels/leftSidebar.css`     |
 | BAKA ID panel     | `js/panels/bakaId.js`          | —                                     | `css/panels/bakaId.css`          |
 | Map mode toggle   | `js/panels/mapMode.js`         | —                                     | `css/panels/mapMode.css`         |
-| Analysis results  | `js/panels/analysisResults.js` | `js/data/analysisResults.data.js`     | `css/panels/analysisResults.css` |
 | Right panel       | `js/panels/rightSidebar.js`    | `js/data/plots.data.js` (shared*)     | `css/panels/rightSidebar.css`    |
 | Legend            | `js/panels/legend.js`          | —                                     | `css/panels/legend.css`          |
 | Processing        | `js/panels/processing.js`      | —                                     | `css/panels/processing.css`      |

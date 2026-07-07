@@ -123,7 +123,7 @@ function renderSidebar(container) {
       html += `
           <div class="mb-2 border border-gray-200 rounded overflow-hidden bg-white">
             <div class="flex justify-between items-center px-2 pt-1.5 pb-0">
-              <span class="text-xs text-gray-500">สัดส่วน BAKA Index</span>
+              <span class="text-xs text-gray-500">Compare proportions by BAKA Index</span>
               <button class="expand-chart-btn text-gray-400 hover:text-gray-700 p-0.5" data-type="doughnut" data-id="${id}">${EXPAND_ICON}</button>
             </div>
             <div class="h-24 px-1 pb-1"><canvas id="chart-doughnut-${id}"></canvas></div>
@@ -305,20 +305,18 @@ function initCharts(container) {
 
 function setupInteractions(container) {
   // Setup Collapse/Expand toggle for cards
-  const toggles = container.querySelectorAll('.toggle-collapse');
+  const toggles = container.querySelectorAll('.card-toggle');
   toggles.forEach(toggle => {
     toggle.addEventListener('click', () => {
       const id = toggle.getAttribute('data-id');
-      const card = document.getElementById(`plot-card-${id}`);
-      const content = card.querySelector('.collapse-content');
-      const text = toggle.querySelector('.toggle-text');
+      const content = document.getElementById(`plot-body-${id}`);
       
-      if (content.classList.contains('hidden')) {
+      if (content && content.classList.contains('hidden')) {
         content.classList.remove('hidden');
-        text.textContent = '[ย่อ]';
-      } else {
+        toggle.textContent = 'ย่อ';
+      } else if (content) {
         content.classList.add('hidden');
-        text.textContent = '[ขยาย]';
+        toggle.textContent = 'ขยาย';
       }
     });
   });
