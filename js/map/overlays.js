@@ -55,7 +55,7 @@ class MapOverlays {
     this.blueMarker.setAttribute('fill', '#3b82f6');
     this.blueMarker.setAttribute('stroke', '#ffffff');
     this.blueMarker.setAttribute('stroke-width', '0.5');
-    this.blueMarker.style.display = store.mapLayers && store.mapLayers['ที่ราดฉัน'] ? 'block' : 'none';
+    this.blueMarker.style.display = store.mapLayers && store.mapLayers['ที่ลาดชัน'] ? 'block' : 'none';
     this.svg.appendChild(this.blueMarker);
 
     Object.entries(FAKE_DATA.polygons).forEach(([id, points]) => {
@@ -108,7 +108,7 @@ class MapOverlays {
           label.style.display = on ? 'block' : 'none';
         });
       }
-      if (layer === 'ที่ราดฉัน' && this.blueMarker) {
+      if (layer === 'ที่ลาดชัน' && this.blueMarker) {
         this.blueMarker.style.display = on ? 'block' : 'none';
       }
     });

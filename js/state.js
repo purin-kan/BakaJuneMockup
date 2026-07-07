@@ -30,8 +30,8 @@ export const store = {
   dateRange: { start: '', end: '' },
   cloudCover: '',
   mapMode: 'แผนที่', // memory persisted across processing
-  mapLayers: { 'ที่ราดฉัน': false, 'ป้ายชื่อ': false },
-  searchHistory: ['ค้นหาล่าสุด #1', 'ค้นหาล่าสุด #2']
+  mapLayers: { 'ที่ลาดชัน': false, 'ป้ายชื่อ': false },
+  searchHistory: ['ไร่โชคประดิษฐ์', '@DSMN06SOLFSGREFL']
 };
 
 export function setState(newState) {

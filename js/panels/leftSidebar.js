@@ -47,10 +47,14 @@ export function initLeftSidebar() {
             <span class="text-xs font-bold text-gray-800">1.วาดเส้นขอบเขตพื้นที่แปลง</span>
           </div>
           <div id="sec1-body" class="bg-gray-100 px-2 pt-2 pb-1">
-            <div class="flex gap-1">
-              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="ลบ">🥫 ลบ</button>
+            <div class="flex gap-1 mb-1">
               <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="วาด">✍ วาด</button>
-              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="มือ">🖐 มือ</button>
+              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="ขยับแปลง">✋ ขยับแปลง</button>
+              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="ลบแปลง">❌ ลบแปลง</button>
+            </div>
+            <div class="flex gap-1">
+              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="ย้อนกลับ">🔄 ย้อนกลับ</button>
+              <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="วาดอัตโนมัติ">🪄 อัตโนมัติ</button>
             </div>
             <div class="flex justify-end mt-1">
               <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec1-body">ย่อ</button>
@@ -86,24 +90,47 @@ export function initLeftSidebar() {
             <span class="text-xs font-bold text-gray-800">3.ประมวลผล</span>
           </div>
           <div id="sec3-body" class="bg-gray-100 px-2 pt-2 pb-1">
-            ${[
-              ['บาก้าอินเด็กซ์', 'รายวัน', 'เปรียบเทียบ'],
-              ['วิเคราะห์', 'แต่งหน้าอ้อย', 'ผลผลิตอ้อย'],
-              ['อุณหภูมิ', 'ความชื้นในดิน', 'ความเครียด'],
-              ['เทียบฤดูกาล', 'อนุกรมเวลา', 'เนื้อดิน'],
-              ['สถิติน้ำฝน', 'ติดตามผล', 'ไฟไหม้'],
-            ].map(row => `
-              <div class="flex gap-1 mb-1">
-                ${row.map(fn => `
-                  <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="${fn}">${fn}</button>
-                `).join('')}
-              </div>
-            `).join('')}
-            <div class="flex gap-1 mb-1 mt-2">
-              <button class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">เมนู</button>
-              <button id="btn-process" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50 font-semibold">แปลงอ้อย</button>
-              <button id="btn-cancel" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-red-50 text-red-600">ยกเลิก</button>
+            <div class="flex gap-1 mb-2">
+              <button id="btn-process" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50 font-semibold text-gray-800">กลับไปที่แปลง</button>
+              <button id="btn-cancel" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-red-50 text-red-600 font-semibold">ยกเลิก</button>
             </div>
+            <div class="font-bold text-xs text-gray-700 mb-1">ฟังก์ชันที่ใช้บ่อย</div>
+            <div class="flex gap-1 mb-1">
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="บาก้าอินเด็กซ์">บาก้าอินเด็กซ์</button>
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="รายวัน">รายวัน</button>
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="เปรียบเทียบ">เปรียบเทียบ</button>
+            </div>
+            <div class="flex gap-1 mb-2">
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="วิเคราะห์">วิเคราะห์</button>
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="แต่งหน้าอ้อย">แต่งหน้าอ้อย</button>
+              <button class="func-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50" data-func="ผลผลิตอ้อย">ผลผลิตอ้อย</button>
+            </div>
+
+            ${[
+              { label: 'ข้อมูล', rows: [
+                ['วิเคราะห์', 'อุณหภูมิ', 'ความชื้นในดิน'],
+                ['เนื้อดิน', 'สถิติน้ำฝน', 'อนุกรมเวลา'],
+                ['เทียบฤดูกาล'],
+              ]},
+              { label: 'ปัญหา', rows: [
+                ['แต่งหน้าอ้อย', 'ความเครียด', 'ไฟไหม้'],
+              ]},
+              { label: 'ผลผลิต', rows: [
+                ['ผลผลิตอ้อย', 'ติดตามผล'],
+              ]},
+            ].map(cat => `
+              <div class="text-[11px] font-bold text-gray-600 mb-0.5 mt-2">${cat.label}</div>
+              ${cat.rows.map(row => `
+                <div class="flex gap-1 mb-1">
+                  ${row.map(fn => `
+                    <button class="func-btn flex-1 py-1 bg-white border border-gray-200 rounded text-xs hover:bg-green-50" data-func="${fn}">${fn}</button>
+                  `).join('')}
+                </div>
+              `).join('')}
+            `).join('')}
+
+            <div id="func-desc-box" class="hidden bg-white border border-gray-200 rounded p-2 text-xs text-gray-600 mt-2"></div>
+
             <div class="flex justify-end mt-1">
               <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec3-body">ย่อ</button>
             </div>
@@ -132,7 +159,6 @@ export function initLeftSidebar() {
   const checkAllPlots = document.getElementById('check-all-plots');
   const plotChecks = document.querySelectorAll('.plot-check');
   const funcBtns = document.querySelectorAll('.func-btn');
-  const btnProcess = document.getElementById('btn-process');
   const btnCancel = document.getElementById('btn-cancel');
 
   // Collapse: hide body, keep title visible, make bg transparent
@@ -249,6 +275,14 @@ export function initLeftSidebar() {
   });
 
   // Function buttons
+  bus.on('func:select', ({ desc }) => {
+    const box = document.getElementById('func-desc-box');
+    if (box && desc) {
+      box.textContent = desc;
+      box.classList.remove('hidden');
+    }
+  });
+
   funcBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const key = btn.dataset.func;
@@ -256,11 +290,11 @@ export function initLeftSidebar() {
       funcBtns.forEach(b => b.classList.remove('ring-2', 'ring-green-500', 'bg-green-50'));
       btn.classList.add('ring-2', 'ring-green-500', 'bg-green-50');
       bus.emit('func:select', { key, group: '', desc });
+      bus.emit('process:start', {});
     });
   });
 
-  // Process / Cancel
-  btnProcess.addEventListener('click', () => bus.emit('process:start', {}));
+  // Cancel
   btnCancel.addEventListener('click', () => bus.emit('process:cancel', {}));
 
   // Disable during processing

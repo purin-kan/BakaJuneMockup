@@ -164,7 +164,7 @@ reaches the step that needs it. Implement these behaviors (fake the data, but ma
 | `process:cancel`     | `{}`                             | processing/left   | state.js                             |
 | `process:complete`   | `{}`                             | processing        | state.js                             |
 | `mapmode:change`     | `{ mode }` (แผนที่/ภาพถ่ายดาวเทียม)| mapMode         | overlays; persisted in store (memory)|
-| `maplayer:toggle`    | `{ layer, on }` (ที่ราดฉัน/ป้ายชื่อ)| mapMode        | overlays                             |
+| `maplayer:toggle`    | `{ layer, on }` (ที่ลาดชัน/ป้ายชื่อ)| mapMode        | overlays                             |
 | `search:submit`      | `{ query }`                      | bakaId            | bakaId (adds + retains fake result)  |
 | `toast`              | `{ message, ms }`                | any               | a global toast renderer (in base/main)|
 | `chart:expand`       | `{ chartId }`                    | rightSidebar      | a modal renderer                     |
@@ -249,8 +249,8 @@ via an **"ขยาย"** button on that strip. All open/close transitions are 2
 - Pill tabs [แผนที่] [ภาพถ่ายดาวเทียม] (toggle active, emit `mapmode:change`).
   **Map-mode memory:** the chosen mode is stored and persists across processing — it must NOT reset
   to the default after `process:start`/`process:complete` (behavior #4).
-- Checkboxes ☐ ที่ราดฉัน ☐ ป้ายชื่อ → emit `maplayer:toggle`.
-  ที่ราดฉัน toggles a fake translucent blue marker on the map; ป้ายชื่อ toggles the plot number labels.
+- Checkboxes ☐ ที่ลาดชัน ☐ ป้ายชื่อ → emit `maplayer:toggle`.
+  ที่ลาดชัน toggles a fake translucent blue marker on the map; ป้ายชื่อ toggles the plot number labels.
 
 ### PANEL 4 — Analysis Results (`analysisResults.js`) — floating, top-center, ~500px (Processed only)
 - Header tabs [หนังสือ] [ค่าดาวเทียมเทียม] + ย่อ.
@@ -300,7 +300,7 @@ via an **"ขยาย"** button on that strip. All open/close transitions are 2
 - Polygons appear after processing; each is shown/hidden via `plot:toggle`.
 - In Processed state, overlay a translucent red→yellow→green heatmap (CSS/SVG gradient is fine)
   on each polygon to mimic the BAKA index.
-- Respond to `maplayer:toggle` (ป้ายชื่อ toggles number labels; ที่ราดฉัน toggles the blue marker).
+- Respond to `maplayer:toggle` (ป้ายชื่อ toggles number labels; ที่ลาดชัน toggles the blue marker).
 
 ---
 

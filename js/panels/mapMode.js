@@ -19,8 +19,8 @@ export function initMapMode() {
       <!-- Layer + fullscreen row -->
       <div class="hidden border-t border-gray-300 flex items-center justify-between" id="mapMode-layers">
         <label class="flex items-center gap-2 px-3 py-1.5 text-sm font-bold text-gray-800 cursor-pointer hover:bg-gray-50" id="mapMode-layer-terrain">
-          <input type="checkbox" data-layer="ที่ราดชัน" class="layer-checkbox w-4 h-4 cursor-pointer">
-          <span>ที่ราดชัน</span>
+          <input type="checkbox" data-layer="ที่ลาดชัน" class="layer-checkbox w-4 h-4 cursor-pointer">
+          <span>ที่ลาดชัน</span>
         </label>
         <label class="hidden items-center gap-2 px-3 py-1.5 text-sm font-bold text-gray-800 cursor-pointer hover:bg-gray-50" id="mapMode-layer-labels">
           <input type="checkbox" data-layer="ป้ายชื่อ" class="layer-checkbox w-4 h-4 cursor-pointer">

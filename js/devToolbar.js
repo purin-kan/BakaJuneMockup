@@ -5,11 +5,11 @@ const ALL_PANEL_IDS = [
   'panel-leftSidebar',
   'panel-bakaId',
   'panel-mapMode',
-  'panel-analysisResults',
   'panel-rightSidebar',
   'panel-legend',
   'panel-processing',
-  'panel-userManual'
+  'panel-userManual',
+  'panel-dataLevel'
 ];
 
 function setPanelsDisplay(value) {
