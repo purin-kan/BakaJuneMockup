@@ -81,16 +81,16 @@
     <div id="panel-mapMode" class="absolute top-4 z-20" style="right: 16px; transition: right 0.3s;"></div>
 
     <!-- Fullscreen Button (separate from map mode) -->
-    <button id="btn-fullscreen" class="absolute z-20 bg-white border border-gray-300 shadow-md w-8 h-8 flex items-center justify-center hover:bg-gray-50" style="top: calc(1rem + 70px); right: 16px; transition: right 0.3s;">
+    <button id="btn-fullscreen" class="absolute z-20 bg-white border border-gray-300 shadow-md p-1.5 hover:bg-gray-50" style="top: calc(1rem + 70px); right: 16px; transition: right 0.3s;">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#666" stroke-width="2">
         <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
       </svg>
     </button>
 
     <!-- Zoom Buttons -->
-    <div id="zoom-buttons" class="absolute z-20 w-8 flex flex-col shadow-md border border-gray-200 overflow-hidden bg-white" style="top: calc(1rem + 70px + 44px); right: 16px; transition: right 0.3s;">
-      <button id="zoom-in" class="w-full h-8 text-xl font-light text-gray-700 hover:bg-gray-100 border-b border-gray-200 flex items-center justify-center">+</button>
-      <button id="zoom-out" class="w-full h-8 text-xl font-light text-gray-700 hover:bg-gray-100 flex items-center justify-center">−</button>
+    <div id="zoom-buttons" class="absolute z-20 flex flex-col shadow-md border border-gray-200 overflow-hidden bg-white" style="top: 210px; left: 341px; transition: left 0.3s;">
+      <button id="zoom-in" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 border-b border-gray-200 flex items-center justify-center">+</button>
+      <button id="zoom-out" class="w-8 h-8 text-xl font-light text-gray-700 hover:bg-gray-100 flex items-center justify-center">−</button>
     </div>
 
     <!-- Data Level (Top Center) -->
@@ -131,8 +131,8 @@
     </div>
   </div>
 
-  <!-- Dev Toolbar (disabled) -->
-  <!-- <div id="dev-toolbar-mount"></div> -->
+  <!-- Dev Toolbar -->
+  <div id="dev-toolbar-mount"></div>
 
   <!-- Scripts -->
   <script type="module" src="js/main.js"></script>
