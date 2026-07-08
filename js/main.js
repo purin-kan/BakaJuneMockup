@@ -12,7 +12,7 @@ import { initProcessing } from './panels/processing.js';
 import { initUserManual } from './panels/userManual.js';
 import { initDataLevel } from './panels/dataLevel.js';
 import { initMapOverlays } from './map/overlays.js';
-import { initDevToolbar } from './devToolbar.js';
+// import { initDevToolbar } from './devToolbar.js';
 
 // Global Toast Handler
 const toastContainer = document.getElementById('toast-container');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initUserManual();
   initDataLevel();
   initMapOverlays();
-  initDevToolbar();
+  // initDevToolbar();
 
   // Start app in HOME state
   setState(AppState.HOME);
