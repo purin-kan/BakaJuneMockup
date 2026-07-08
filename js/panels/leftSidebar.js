@@ -43,8 +43,9 @@ export function initLeftSidebar() {
 
         <!-- Section 1: วาดเส้นขอบเขต -->
         <div class="m-2 border border-gray-200 rounded overflow-hidden">
-          <div class="px-2 py-1.5 bg-white">
+          <div class="px-2 py-1.5 bg-white flex justify-between items-center">
             <span class="text-xs font-bold text-gray-800">1.วาดเส้นขอบเขตพื้นที่แปลง</span>
+            <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec1-body">ย่อ</button>
           </div>
           <div id="sec1-body" class="bg-gray-100 px-2 pt-2 pb-1">
             <div class="flex gap-1">
@@ -52,16 +53,14 @@ export function initLeftSidebar() {
               <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="วาด">✍ วาด</button>
               <button class="tool-btn flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50" data-tool="มือ">🖐 มือ</button>
             </div>
-            <div class="flex justify-end mt-1">
-              <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec1-body">ย่อ</button>
-            </div>
           </div>
         </div>
 
         <!-- Section 2: เลือกแปลง -->
         <div class="m-2 border border-gray-200 rounded overflow-hidden">
-          <div class="px-2 py-1.5 bg-white">
+          <div class="px-2 py-1.5 bg-white flex justify-between items-center">
             <span class="text-xs font-bold text-gray-800">2.เลือกแปลง</span>
+            <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec2-body">ย่อ</button>
           </div>
           <div id="sec2-body" class="bg-gray-100 px-2 pt-2 pb-1">
             <label class="flex items-center gap-2 text-xs cursor-pointer mb-1">
@@ -74,16 +73,14 @@ export function initLeftSidebar() {
                 <span>แปลง ${id}</span>
               </label>
             `).join('')}
-            <div class="flex justify-end mt-1">
-              <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec2-body">ย่อ</button>
-            </div>
           </div>
         </div>
 
         <!-- Section 3: ประมวลผล -->
         <div class="m-2 border border-gray-200 rounded overflow-hidden">
-          <div class="px-2 py-1.5 bg-white">
+          <div class="px-2 py-1.5 bg-white flex justify-between items-center">
             <span class="text-xs font-bold text-gray-800">3.ประมวลผล</span>
+            <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec3-body">ย่อ</button>
           </div>
           <div id="sec3-body" class="bg-gray-100 px-2 pt-2 pb-1">
             ${[
@@ -103,9 +100,6 @@ export function initLeftSidebar() {
               <button class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-gray-50">เมนู</button>
               <button id="btn-process" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-green-50 font-semibold">แปลงอ้อย</button>
               <button id="btn-cancel" class="flex-1 py-1 bg-white border border-gray-300 rounded text-xs hover:bg-red-50 text-red-600">ยกเลิก</button>
-            </div>
-            <div class="flex justify-end mt-1">
-              <button class="sec-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-200 bg-white" data-target="sec3-body">ย่อ</button>
             </div>
           </div>
         </div>
@@ -140,7 +134,6 @@ export function initLeftSidebar() {
   const sidebarContent = document.getElementById('left-sidebar-content');
   const titleBlock = sidebarContent.querySelector('.shrink-0');
   const googleLogo = document.getElementById('google-logo');
-  const zoomButtons = document.getElementById('zoom-buttons');
   const legendPanel = document.getElementById('panel-legend');
   btnCollapse.addEventListener('click', () => {
     collapsed = !collapsed;
@@ -151,7 +144,6 @@ export function initLeftSidebar() {
       titleBlock.style.background = 'rgba(255,255,255,1)';
       titleBlock.style.borderBottom = 'none';
       if (googleLogo) googleLogo.style.left = '8px';
-      if (zoomButtons) zoomButtons.style.left = '8px';
       if (legendPanel) legendPanel.style.left = '8px';
       btnCollapse.textContent = 'ขยาย';
     } else {
@@ -161,7 +153,6 @@ export function initLeftSidebar() {
       titleBlock.style.background = '';
       titleBlock.style.borderBottom = '';
       if (googleLogo) googleLogo.style.left = '333px';
-      if (zoomButtons) zoomButtons.style.left = '341px';
       if (legendPanel) legendPanel.style.left = '333px';
       btnCollapse.textContent = 'ย่อ';
     }
