@@ -86,9 +86,10 @@ function renderSidebar(container) {
     const plot = FAKE_DATA.plots[id];
     html += `
       <div id="plot-card-${id}" class="hidden border-b border-gray-200">
-        <!-- Card header -->
+        <!-- Card header: the collapse toggle lives here so it stays visible when the body is collapsed -->
         <div class="px-3 py-2 bg-white flex justify-between items-center">
           <span class="font-bold text-sm text-gray-800">แปลง ${id}</span>
+          <button class="card-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-100 bg-white" data-id="${id}">ย่อ</button>
         </div>
         <!-- Card body -->
         <div id="plot-body-${id}" class="px-3 pb-2">
@@ -132,9 +133,6 @@ function renderSidebar(container) {
     }
 
     html += `
-          <div class="flex justify-end mt-1 mb-1">
-            <button class="card-toggle text-xs border border-gray-300 px-2 py-0.5 rounded text-gray-500 hover:bg-gray-100 bg-white" data-id="${id}">ย่อ</button>
-          </div>
         </div>
       </div>
     `;
