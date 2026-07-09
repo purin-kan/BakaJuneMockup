@@ -93,6 +93,9 @@ export function initMapMode() {
     cb.addEventListener('change', (e) => {
       const layer = e.target.dataset.layer;
       const on = e.target.checked;
+      // The slope (ที่ลาดชัน) checkbox is intentionally inert per todo.md:
+      // it still ticks/unticks visually but has no effect on the map.
+      if (layer === 'ที่ลาดชัน') return;
       bus.emit('maplayer:toggle', { layer, on });
       setTimeout(updateUI, 0);
     });
